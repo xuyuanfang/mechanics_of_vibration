@@ -5,7 +5,7 @@
 
 ##Student Info
 * 姓名：徐远方
-* 学号：2012301890058
+* 学号：
 
 ##1.绘制幅频特性曲线
 ###Code-MATLAB(Plot4BetaLambda.m)
