@@ -25,6 +25,7 @@
     axis([0 3 0 5])
     title('幅频特性曲线')
     xlabel('lambda')
+    ylabel('beta')
 
 ###Figure
 <center>
@@ -60,8 +61,8 @@
         delta_lambda = div2_rele_lambda - div1_rele_lambda;
         zeta_cal = 1/2*delta_lambda;
         rela_error = abs(zeta_cal - zeta)/zeta;
-        plot(zeta, rela_error, 'o', 'MarkerFaceColor', 'r', 'MarkerSize', 3, 'MarkerEdgeColor', 'r')
-        plot(zeta, zeta_cal, '+', 'MarkerFaceColor', 'r', 'MarkerSize', 5, 'MarkerEdgeColor', 'b')
+        plot(zeta, rela_error, 'o', 'MarkerSize', 3, 'MarkerEdgeColor', 'r')
+        plot(zeta, zeta_cal, '+', 'MarkerSize', 5, 'MarkerEdgeColor', 'b')
         hold on;
     end
     
