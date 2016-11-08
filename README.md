@@ -100,7 +100,7 @@
         end
         plot(lambda, theta)
         text(1.5, 180 + atan(2*zeta*1.5/(1 - 1.5^2)).*180./pi, num2str(zeta));
-        hold on
+        hold on;
     end
     
     plot([1,1], [0,180], '--')
