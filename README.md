@@ -73,7 +73,7 @@
     text(0.01, zeta_cal, num2str(zeta_cal));
     text(0.01, 0.05, '0.05');
     text(0.05, 0.6, '红色o为相对误差', 'FontSize', 12);
-    text(0.05, 0.56, '蓝色+为计算得ζ‘值', 'FontSize', 12);
+    text(0.05, 0.56, '蓝色+为计算得ζ值', 'FontSize', 12);
     plot([0,1], [zeta_cal, zeta_cal], '--')
     plot([0,1], [0.05, 0.05], '--')
     title('半功率法相对误差图(含计算得ζ值)', 'FontSize', 20)
