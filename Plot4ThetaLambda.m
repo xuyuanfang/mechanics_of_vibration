@@ -16,6 +16,6 @@ for zeta = 0.2:0.2:1
 end
 
 plot([1,1], [0,180], '--')
-title('相频曲线')
-xlabel('lambda')
-ylabel('theta')
+title('相频曲线', 'FontSize', 20)
+xlabel('lambda', 'FontSize', 16)
+ylabel('theta(°)', 'FontSize', 16)

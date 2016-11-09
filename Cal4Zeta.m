@@ -3,7 +3,7 @@ clear
 clc
 
 for zeta = 0.002:0.002:1;
-    lambda = 0:0.001:3;%3001
+    lambda = 0:0.001:3; %3001
     beta = 1./sqrt((1 - lambda.^2).^2 + (2*zeta*lambda).^2);
     Q = max(beta(:));
     Q_divsqrt2 = Q/sqrt(2);
@@ -28,12 +28,18 @@ for zeta = 0.002:0.002:1;
     plot(zeta, rela_error, 'o', 'MarkerSize', 3, 'MarkerEdgeColor', 'r')
     plot(zeta, zeta_cal, '+', 'MarkerSize', 5, 'MarkerEdgeColor', 'b')
     hold on;
+
+    if rem(zeta/0.002, 25) == 0
+        fprintf('%s%.4f%s%.4f%s%.4f%s\n','|',zeta,'|',zeta_cal,'|',100*rela_error,'|');
+    end
 end
 
-text(0.1, 0.6, '红色o为半功率法相对误差');
-text(0.1, 0.56, '蓝色+为计算得ζ值');
+text(0.01, zeta_cal, num2str(zeta_cal));
+text(0.01, 0.05, '0.05');
+text(0.05, 0.6, '红色o为相对误差', 'FontSize', 12);
+text(0.05, 0.56, '蓝色+为计算得ζ值', 'FontSize', 12);
 plot([0,1], [zeta_cal, zeta_cal], '--')
 plot([0,1], [0.05, 0.05], '--')
-title('半功率法相对误差图(含计算得ζ值)')
-xlabel('zeta')
-ylabel('rela error')
+title('半功率法相对误差图(含计算得ζ值)', 'FontSize', 20)
+xlabel('zeta', 'FontSize', 16)
+ylabel('rela error (zeta cal)', 'FontSize', 16)

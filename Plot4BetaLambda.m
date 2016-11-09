@@ -12,6 +12,6 @@ end
 
 plot([1,1], [0,5], '--')
 axis([0 3 0 5])
-title('幅频特性曲线')
-xlabel('lambda')
-ylabel('beta')
+title('幅频特性曲线', 'FontSize', 20)
+xlabel('lambda', 'FontSize', 16)
+ylabel('beta', 'FontSize', 16)
