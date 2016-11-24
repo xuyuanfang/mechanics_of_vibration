@@ -29,7 +29,7 @@
 
 ### Figure
 <center>
-![figure1](img/1.png)
+![figure1](img/vir1.png)
 </center>
 
 ## 2.“半功率法”计算ζ
@@ -107,7 +107,7 @@
 
 ### Figure
 <center>
-![figure1](img/2.png)
+![figure1](img/vir2.png)
 </center>
 
 ### Conclusion
@@ -141,5 +141,13 @@
 
 ### Figure
 <center>
-![figure2](img/3.png)
+![figure2](img/vir3.png)
 </center>
+
+----
+###### 本文由Markdown编排，图片使用的png格式，图片清晰度不及LaTex使用的pdf图片格式，故将此次作业的电子版二维码置于下方。
+<center>
+![figure1](img/github.png)
+</center>
+
+### 电子版地址 https://github.com/xuyuanfang/mechanics_of_vibration
