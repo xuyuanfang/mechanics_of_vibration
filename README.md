@@ -6,6 +6,8 @@
 
 **附.Code-MATLAB 函数**
 
+[Read More](/archive-20161119/README.md)
+
 # [振动力学程序作业-20161030](/archive-20161030/README.md)
 
 **1. 绘制幅频特性曲线**
@@ -14,3 +16,4 @@
 
 **3.  绘制相频曲线**
 
+[Read More](/archive-20161030/README.md)
