@@ -154,7 +154,7 @@
 ----
 ###### 本文由Markdown编排，图片使用的png格式，图片清晰度不及LaTex使用的pdf图片格式，故将此次作业的电子版二维码置于下方。
 <center>
-![figure1](img/github.png)
+ <img src="img/github.png" width = "200" height = "200" alt="" />
 </center>
 
 ### 电子版地址 https://github.com/xuyuanfang/mechanics_of_vibration
