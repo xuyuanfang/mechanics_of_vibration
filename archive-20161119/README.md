@@ -4,7 +4,7 @@
 
 **1.使用杜哈梅积分计算任意非周期激励的响应（水塔算例）**
 
-**附.Code-MATLAB 函数**
+**附.Code-MATLAB**
 
 ## Student Info
 - 姓名：徐远方
@@ -29,7 +29,7 @@
 ![figure4](img/acceleration.png)
 </center>
 
-## 附: Code-MATLAB 函数
+## 附: Code-MATLAB
 ### Main Program (Duhamel.m)
     %@author: xuyuanfang
     clear 
@@ -157,4 +157,4 @@
  <img src="img/github.png" width = "200" height = "200" alt="" />
 </center>
 
-### 电子版地址 https://github.com/xuyuanfang/mechanics_of_vibration
+#### 电子版地址 https://github.com/xuyuanfang/mechanics_of_vibration
