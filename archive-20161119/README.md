@@ -32,9 +32,17 @@
 ### Figure
 <center>
 ![figure1](img/force0.png)
+
+
 ![figure2](img/displacement0.png)
+
+
 ![figure3](img/velocity0.png)
+
+
 ![figure4](img/acceleration0.png)
+
+
 </center>
 
 ## 1.2 水塔受正弦激励的算例
@@ -47,9 +55,17 @@
 ### Figure
 <center>
 ![figure1](img/force1.png)
+
+
 ![figure2](img/displacement1.png)
+
+
 ![figure3](img/velocity1.png)
+
+
 ![figure4](img/acceleration1.png)
+
+
 </center>
 
 ## 2.结论
