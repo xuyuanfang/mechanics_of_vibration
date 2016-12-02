@@ -9,7 +9,7 @@
 
 ## 1.绘制幅频特性曲线
 ### Code-MATLAB(Plot4BetaLambda.m)
-    %@author: xuyuanfang
+    % @author: xuyuanfang
     clear
     clc
     
@@ -34,12 +34,12 @@
 
 ## 2.“半功率法”计算ζ
 ### Code-MATLAB(Cal4Zeta.m)
-    %@author: xuyuanfang
+    % @author: xuyuanfang
     clear 
     clc
     
     for zeta = 0.002:0.002:1;
-        lambda = 0:0.001:3; %3001
+        lambda = 0:0.001:3; % 3001
         beta = 1./sqrt((1 - lambda.^2).^2 + (2*zeta*lambda).^2);
         Q = max(beta(:));
         Q_divsqrt2 = Q/sqrt(2);
@@ -117,7 +117,7 @@
 
 ## 3.绘制相频曲线
 ### Code-MATLAB(Plot4ThetaLambda.m)
-    %@author: xuyuanfang
+    % @author: xuyuanfang
     clear
     clc
     

@@ -1,13 +1,13 @@
-%@author: xuyuanfang
+% @author: xuyuanfang
 clear 
 clc
 tic
 
-c = 316.2;
-k = 1e5;
-m = 100;
-t = 1;
-delta_t = 0.005;
+c = 316.2;  % ËãÀı1.1 316.2 ËãÀı1.2 41.67
+k = 1e5;    % ËãÀı1.1 1e5 ËãÀı1.2 2953.5
+m = 100;    % ËãÀı1.1 100 ËãÀı1.2 30
+t = 1;      % ËãÀı1.1 1 ËãÀı1.2 4
+delta_t = 0.005;    % ËãÀı1.1 0.005 ËãÀı1.2 0.01
 div_num = t/delta_t;
 x0 = 0;
 v0 = 10;
@@ -31,7 +31,7 @@ for i = 1:div_num + 1
     for j = 1:i
         tau0 = (j - 1)*t/div_num;
         tau1 = j*t/div_num;
-        %Duhamel(a, b, t, c, k, m, precision)
+        % Duhamel(a, b, t, c, k, m, precision)
         D = F(tau0)*Duhamel(tau0, tau1, tau, c, k, m, precision);
         x = x + D;
     end

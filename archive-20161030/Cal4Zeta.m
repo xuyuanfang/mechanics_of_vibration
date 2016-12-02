@@ -1,9 +1,9 @@
-%@author: xuyuanfang
+% @author: xuyuanfang
 clear 
 clc
 
 for zeta = 0.002:0.002:1;
-    lambda = 0:0.001:3; %3001
+    lambda = 0:0.001:3; % 3001
     beta = 1./sqrt((1 - lambda.^2).^2 + (2*zeta*lambda).^2);
     Q = max(beta(:));
     Q_divsqrt2 = Q/sqrt(2);

@@ -1,4 +1,4 @@
-%@author: xuyuanfang
+% @author: xuyuanfang
 clear
 clc
 

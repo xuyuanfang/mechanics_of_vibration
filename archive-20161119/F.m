@@ -1,6 +1,6 @@
-%@author: xuyuanfang
+% @author: xuyuanfang
 function F = F(t)
-    %激励力
+    % 脉冲激励时的激励函数
     if t <= 0.02
         F = 6e6*t;
     elseif t > 0.02 && t <= 0.04
@@ -12,8 +12,9 @@ function F = F(t)
     end
 end
 
+% 下为正弦激励时的激励函数
 % if t <= 3
-%     F = 3000*9.8*sin(2*pi*t);
+% F = 30*9.81*sin(2*pi*t);
 % else
-%     F = 0;
+% F = 0;
 % end
