@@ -92,7 +92,7 @@
 
 </center>
 
-## 2.结论
+## 2. 结论
 
 以上两个算例的各个参数均参考pdf文件（duhamel-newcivil.pdf）的参数给出，唯一的区别是本文的两个算例计算的响应时间比原文更长。在相同时间区间内，计算结果绘出的图像与pdf文件中的相吻合。由于本程序中速度、加速度项是通过差分法计算的，所以当时间步长较小时，它们的数值误差可能会比较大。
 
@@ -188,7 +188,7 @@
     ylabel('Force (Newton)', 'FontSize', 12)
     toc
 
-### Subprogram (Duhamel.m)
+### Subprogram1 (Duhamel.m)
 
     % @author: xuyuanfang
     function D = Duhamel(a, b, t, c, k, m, precision)
@@ -214,7 +214,7 @@
         end
     end
 
-### Subprogram (F.m)
+### Subprogram2 (F.m)
 
     % @author: xuyuanfang
     function F = F(t)
