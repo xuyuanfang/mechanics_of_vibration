@@ -13,7 +13,7 @@ function F = F(t)
 end
 
 % 下为正弦激励时的激励函数
-% if t <= 3
+% if t <= 8
 % F = 30*9.81*sin(2*pi*t);
 % else
 % F = 0;

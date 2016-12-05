@@ -6,11 +6,11 @@ tic
 c = 316.2;  % À„¿˝1.1 316.2 À„¿˝1.2 41.67
 k = 1e5;    % À„¿˝1.1 1e5 À„¿˝1.2 2953.5
 m = 100;    % À„¿˝1.1 100 À„¿˝1.2 30
-t = 1;      % À„¿˝1.1 1 À„¿˝1.2 4
+t = 1;      % À„¿˝1.1 1 À„¿˝1.2 10
 delta_t = 0.005;    % À„¿˝1.1 0.005 À„¿˝1.2 0.01
 div_num = t/delta_t;
 x0 = 0;
-v0 = 10;
+v0 = 0;
 
 t_matrix = 0:delta_t:t;
 F_matrix = zeros(div_num + 1,1);
@@ -52,29 +52,29 @@ end
 subplot(2,2,1)
 plot(t_matrix, F_matrix);
 grid on
-title('FORCE - TIME', 'FontSize', 16)
+title('EXCITING FORCE - TIME', 'FontSize', 16)
 xlabel('Time (Sec)', 'FontSize', 12)
-ylabel('Force (Newton)', 'FontSize', 12)
+ylabel('Exciting Force (Newton)', 'FontSize', 12)
 
 subplot(2,2,2)
+plot(t_matrix, x_matrix);
+grid on
+title('DISPLACEMENT - TIME', 'FontSize', 16)
+xlabel('Time (Sec)', 'FontSize', 12)
+ylabel('Displacement (Meter)', 'FontSize', 12)
+
+subplot(2,2,3)
 plot(t_matrix, v_matrix);
 grid on
 title('VELOCITY - TIME', 'FontSize', 16)
 xlabel('Time (Sec)', 'FontSize', 12)
 ylabel('Velocity (Meter per Sec)', 'FontSize', 12)
 
-subplot(2,2,3)
+subplot(2,2,4)
 plot(t_matrix, a_matrix);
 grid on
 title('ACCELERATION - TIME', 'FontSize', 16)
 xlabel('Time (Sec)', 'FontSize', 12)
 ylabel('Acceleration (Meter per Sec^2)', 'FontSize', 12)
-
-subplot(2,2,4)
-plot(t_matrix, x_matrix);
-grid on
-title('DISPLACEMENT - TIME', 'FontSize', 16)
-xlabel('Time (Sec)', 'FontSize', 12)
-ylabel('Displacement (Meter)', 'FontSize', 12)
 
 toc
