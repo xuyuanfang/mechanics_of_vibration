@@ -245,4 +245,4 @@
  <img src="img/github.png" width = "200" height = "200" alt="" />
 </center>
 
-#### 电子版地址 https://github.com/xuyuanfang/mechanics_of_vibration
+#### Github地址 https://github.com/xuyuanfang/mechanics_of_vibration
