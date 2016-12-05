@@ -30,9 +30,16 @@
 ### 参数
 
 ------
-| k (N/m) | m (kg) | c (N*s/m) | t (s) | delta_t (s) | x0 (m) | v0 (m/s)
+| k (N/m) | m (kg) | c (N*s/m) | t (s) | delta_t (s) | x0 (m) | v0 (m/s) |
 | :------- | :-------| :-------| :-------| :------- | :-------| :-------|
 | 1e5 | 100 | 316.2 | 1 | 0.005 | 0 | 0 |
+------
+
+### 激励力
+------
+| t (s) | 0 ≤ t < 0.02 | 0.02 ≤ t < 0.04 | 0.04 ≤ t < 0.06 | 0.06 ≤ t ≤ 1 |
+| :------- | :-------| :-------| :-------| :------- |
+| k (N/m) | 6000000 t | 120000 | 360000 - 6000000 t | 0 |
 ------
 
 ### Figure
@@ -57,9 +64,16 @@
 ### 参数
 
 ------
-| k (N/m) | m (kg) | c (N*s/m) | t (s) | delta_t (s) | x0 (m) | v0 (m/s)
+| k (N/m) | m (kg) | c (N*s/m) | t (s) | delta_t (s) | x0 (m) | v0 (m/s) |
 | :------- | :-------| :-------| :-------| :------- | :-------| :-------|
 | 2953.5 | 30 | 41.67 | 10 | 0.01 | 0 | 0 |
+
+### 激励力
+------
+| t (s) | 0 ≤ t < 8 | 8s ≤ t ≤ 10 |
+| :------- | :-------| :-------|
+| k (N/m) | 294.3 sin(2pi*t) | 0 |
+------
 
 ### Figure
 
@@ -93,7 +107,7 @@
 ------
 ## 附: Code-MATLAB
 
-### Main Program (Cal4Non-periodic_excitation.m)
+### Main Program (Cal4Non_periodic_excitation.m)
     % @author: xuyuanfang
     clear 
     clc
@@ -189,12 +203,12 @@
             h = @(tau, t)1./m./omegad.*exp(-zeta.*omega0.*(t - tau))...
                 .*sin(omegad.*(t- tau));
     
-            c = (b - a)/2/precision;
-            A = a:c:b;       %A为(a,b)的n等分横坐标向量
-            B = h(A, t);     %B为A对应的函数值向量
+            p = (b - a)/2/precision;
+            A = a:p:b;       % A为(a,b)的n等分横坐标向量
+            B = h(A, t);     % B为A对应的函数值向量
             D = 0;
             for i = 1:precision; 
-                s = c/3*(B(2*i - 1) + 4*B(2*i) + B(2*i + 1));
+                s = p/3*(B(2*i - 1) + 4*B(2*i) + B(2*i + 1));
                 D = D + s;
             end
         end
