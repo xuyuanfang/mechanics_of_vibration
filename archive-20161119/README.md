@@ -205,7 +205,7 @@
 
     % @author: xuyuanfang
     function D = Duhamel(a, b, t, c, k, m, precision)
-        %Simpson
+        % Simpson
         if a == b
             D = 0;
         else
@@ -265,7 +265,7 @@
 ###### 本文由Markdown编排，图片使用的png格式，图片清晰度不及LaTex使用的pdf图片格式，故将此次作业的电子版二维码置于下方，以便查阅。
 
 <center>
- <img src="img/github.png" width = "200" height = "200" alt="" />
+ <img src="img/github.png" width = "150" height = "150" alt="" />
 </center>
 
 #### Github地址 https://github.com/xuyuanfang/mechanics_of_vibration
