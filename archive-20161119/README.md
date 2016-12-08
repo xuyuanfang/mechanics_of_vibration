@@ -108,22 +108,35 @@
 ## 附: Code-MATLAB
 
 ### Main Program (Cal4Non_periodic_excitation.m)
+
     % @author: xuyuanfang
     clear 
     clc
     tic
-
+    
     c = 316.2;  % 算例1.1 316.2 算例1.2 41.67
     k = 1e5;    % 算例1.1 1e5 算例1.2 2953.5
     m = 100;    % 算例1.1 100 算例1.2 30
-    t = 1;      % 算例1.1 1 算例1.2 10
+    total_t = 1;      % 算例1.1 1 算例1.2 10
     delta_t = 0.005;    % 算例1.1 0.005 算例1.2 0.01
-    div_num = t/delta_t;
+    total_exciting_t = 0.06;    % 算例1.1 0.06 算例1.2 8
     x0 = 0;
     v0 = 0;
     
-    t_matrix = 0:delta_t:t;
-    F_matrix = zeros(div_num + 1,1);
+    [Data_matrix, new_delta_t] = F(delta_t, total_exciting_t);
+    
+    div_num = ceil(total_t/new_delta_t);
+    new_total_t = div_num*new_delta_t;
+    
+    if size(Data_matrix,1) < div_num
+    	line = size(Data_matrix,1);
+    	for i = line + 1:div_num + 1
+            Data_matrix(i, 2) = 0;
+    	end
+    end
+    
+    t_matrix = 0:new_delta_t:new_total_t;
+    F_matrix = Data_matrix(:, 2);
     x_matrix = zeros(div_num + 1,1);
     v_matrix = zeros(div_num + 1,1);
     a_matrix = zeros(div_num + 1,1);
@@ -134,58 +147,58 @@
     omegad = omega0*sqrt(1 - zeta^2)
     
     for i = 1:div_num + 1
-        tau = i*t/div_num;
-        x = 0;
+        tau = i*new_total_t/div_num;
+        x = x0;
         init = exp(-zeta*omega0*tau)*(x0*cos(omegad*tau) + ...
             (v0 + zeta*omega0*x0)/omegad*sin(omegad*tau));
         for j = 1:i
-            tau0 = (j - 1)*t/div_num;
-            tau1 = j*t/div_num;
+            tau0 = (j - 1)*new_total_t/div_num;
+            tau1 = j*new_total_t/div_num;
             % Duhamel(a, b, t, c, k, m, precision)
-            D = F(tau0)*Duhamel(tau0, tau1, tau, c, k, m, precision);
+            D = F_matrix(j)*Duhamel(tau0, tau1, tau, c, k, m, precision);
             x = x + D;
         end
         x_matrix(i) = init + x;
-        F_matrix(i) = F(tau0);
     end
     
-    v_matrix(1) = 0;
+    v_matrix(1) = v0;
     for i = 1:div_num
-        v_matrix(i + 1) = (x_matrix(i + 1) - x_matrix(i))/delta_t;
+        v_matrix(i + 1) = (x_matrix(i + 1) - x_matrix(i))/new_delta_t;
     end
     
-    a_matrix(1) = F(1)/m;
+    a_matrix(1) = F_matrix(1)/m;
     for i = 1:div_num
-        a_matrix(i + 1) = (v_matrix(i + 1) - v_matrix(i))/delta_t;
+        a_matrix(i + 1) = (v_matrix(i + 1) - v_matrix(i))/new_delta_t;
     end
     
     subplot(2,2,1)
+    plot(t_matrix, F_matrix);
+    grid on
+    title('EXCITING FORCE - TIME', 'FontSize', 16)
+    xlabel('Time (Sec)', 'FontSize', 12)
+    ylabel('Exciting Force (Newton)', 'FontSize', 12)
+    
+    subplot(2,2,2)
     plot(t_matrix, x_matrix);
     grid on
     title('DISPLACEMENT - TIME', 'FontSize', 16)
     xlabel('Time (Sec)', 'FontSize', 12)
     ylabel('Displacement (Meter)', 'FontSize', 12)
     
-    subplot(2,2,2)
+    subplot(2,2,3)
     plot(t_matrix, v_matrix);
     grid on
     title('VELOCITY - TIME', 'FontSize', 16)
     xlabel('Time (Sec)', 'FontSize', 12)
     ylabel('Velocity (Meter per Sec)', 'FontSize', 12)
     
-    subplot(2,2,3)
+    subplot(2,2,4)
     plot(t_matrix, a_matrix);
     grid on
     title('ACCELERATION - TIME', 'FontSize', 16)
     xlabel('Time (Sec)', 'FontSize', 12)
     ylabel('Acceleration (Meter per Sec^2)', 'FontSize', 12)
     
-    subplot(2,2,4)
-    plot(t_matrix, F_matrix);
-    grid on
-    title('FORCE - TIME', 'FontSize', 16)
-    xlabel('Time (Sec)', 'FontSize', 12)
-    ylabel('Force (Newton)', 'FontSize', 12)
     toc
 
 ### Subprogram1 (Duhamel.m)
@@ -217,25 +230,35 @@
 ### Subprogram2 (F.m)
 
     % @author: xuyuanfang
-    function F = F(t)
-        % 脉冲激励时的激励函数
-        if t <= 0.02
-            F = 6e6*t;
-        elseif t > 0.02 && t <= 0.04
-            F = 1.2e5;
-        elseif t >0.04 && t <= 0.06
-            F = 3.6e5 - 6e6*t;
-        else
-            F = 0;
+    function [Data_matrix, new_delta_t] = F(delta_t, total_exciting_t)
+        if exist('input.xlsx', 'file') == 0
+            div_num = ceil(total_exciting_t/delta_t);
+            new_delta_t = total_exciting_t/div_num;
+            data = zeros(div_num + 1, 2);
+            for i = 0:div_num
+                data(i + 1, 1) = i*new_delta_t;% exciting_t
+                % 算例1 脉冲激励时的激励函数
+                if i*new_delta_t <= 0.02
+                    data(i + 1, 2) = 6e6*i*new_delta_t;
+                elseif i*new_delta_t <= 0.04
+                    data(i + 1, 2) = 1.2e5;
+                else
+                    data(i + 1, 2) = 3.6e5 - 6e6*i*new_delta_t;
+                end
+                % 算例1 脉冲激励时的激励函数
+            end
+            filename = 'input.xlsx';
+            sheet = 1;
+            xlRange = 'A1';
+            xlswrite(filename, data, sheet, xlRange)
         end
+        Data_matrix = xlsread('input.xlsx');
+        new_delta_t = Data_matrix(2,1) - Data_matrix(1,1);
     end
-
-    % 下为正弦激励时的激励函数
-    % if t <= 8
-    % F = 30*9.81*sin(2*pi*t);
-    % else
-    % F = 0;
-    % end
+    
+    %     % 算例2 正弦激励时的激励函数
+    %     data(i + 1, 2) = 30*9.81*sin(2*pi*i*new_delta_t);
+    %     % 算例2 正弦激励时的激励函数
 
 ----
 
