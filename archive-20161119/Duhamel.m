@@ -9,7 +9,7 @@ function D = Duhamel(a, b, t, c, k, m, precision)
         omegad = omega0*sqrt(1 - zeta^2);
 
         h = @(tau, t)1./m./omegad.*exp(-zeta.*omega0.*(t - tau))...
-            .*sin(omegad.*(t- tau));
+            .*sin(omegad.*(t - tau));
 
         p = (b - a)/2/precision;
         A = a:p:b;       % A为(a,b)的n等分横坐标向量

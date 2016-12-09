@@ -21,7 +21,12 @@
 
 ### 水塔受非周期水平激励力，由激励力函数F.m给定。
 
- <img src="img/water_tower.png" width = "228" height = "420" align=center />
+- 当程序的同级目录下存在激励力记录表格文件（input.xlsx）时，激励力函数F.m将直接读取表格文件的数据到激励力矩阵中
+- 当程序的同级目录下不存在激励力记录表格文件（input.xlsx）时，激励力函数F.m将根据算例所给的激励力变化函数，结合修正后的时间步长生成相应的激励力矩阵，同时生成对应的激励力表格文件
+
+<center>
+ <img src="img/water_tower.png" width = "163" height = "300" align=center />
+</center>
 
 ## 1. 使用杜哈梅积分计算任意非周期激励的响应
 
@@ -128,8 +133,8 @@
     div_num = ceil(total_t/new_delta_t);
     new_total_t = div_num*new_delta_t;
     
-    if size(Data_matrix,1) < div_num
-    	line = size(Data_matrix,1);
+    if size(Data_matrix, 1) < div_num
+    	line = size(Data_matrix, 1);
     	for i = line + 1:div_num + 1
             Data_matrix(i, 2) = 0;
     	end
@@ -137,9 +142,9 @@
     
     t_matrix = 0:new_delta_t:new_total_t;
     F_matrix = Data_matrix(:, 2);
-    x_matrix = zeros(div_num + 1,1);
-    v_matrix = zeros(div_num + 1,1);
-    a_matrix = zeros(div_num + 1,1);
+    x_matrix = zeros(div_num + 1, 1);
+    v_matrix = zeros(div_num + 1, 1);
+    a_matrix = zeros(div_num + 1, 1);
     precision = 1;
     
     omega0 = sqrt(k/m)
@@ -171,28 +176,28 @@
         a_matrix(i + 1) = (v_matrix(i + 1) - v_matrix(i))/new_delta_t;
     end
     
-    subplot(2,2,1)
+    subplot(2, 2, 1)
     plot(t_matrix, F_matrix);
     grid on
     title('EXCITING FORCE - TIME', 'FontSize', 16)
     xlabel('Time (Sec)', 'FontSize', 12)
     ylabel('Exciting Force (Newton)', 'FontSize', 12)
     
-    subplot(2,2,2)
+    subplot(2, 2, 2)
     plot(t_matrix, x_matrix);
     grid on
     title('DISPLACEMENT - TIME', 'FontSize', 16)
     xlabel('Time (Sec)', 'FontSize', 12)
     ylabel('Displacement (Meter)', 'FontSize', 12)
     
-    subplot(2,2,3)
+    subplot(2, 2, 3)
     plot(t_matrix, v_matrix);
     grid on
     title('VELOCITY - TIME', 'FontSize', 16)
     xlabel('Time (Sec)', 'FontSize', 12)
     ylabel('Velocity (Meter per Sec)', 'FontSize', 12)
     
-    subplot(2,2,4)
+    subplot(2, 2, 4)
     plot(t_matrix, a_matrix);
     grid on
     title('ACCELERATION - TIME', 'FontSize', 16)
@@ -214,7 +219,7 @@
             omegad = omega0*sqrt(1 - zeta^2);
     
             h = @(tau, t)1./m./omegad.*exp(-zeta.*omega0.*(t - tau))...
-                .*sin(omegad.*(t- tau));
+                .*sin(omegad.*(t - tau));
     
             p = (b - a)/2/precision;
             A = a:p:b;       % A为(a,b)的n等分横坐标向量
@@ -237,7 +242,7 @@
             data = zeros(div_num + 1, 2);
             for i = 0:div_num
                 data(i + 1, 1) = i*new_delta_t;% exciting_t
-                % 算例1 脉冲激励时的激励函数
+                % 算例1.1 脉冲激励时的激励函数start
                 if i*new_delta_t <= 0.02
                     data(i + 1, 2) = 6e6*i*new_delta_t;
                 elseif i*new_delta_t <= 0.04
@@ -245,27 +250,29 @@
                 else
                     data(i + 1, 2) = 3.6e5 - 6e6*i*new_delta_t;
                 end
-                % 算例1 脉冲激励时的激励函数
+                % 算例1.1 脉冲激励时的激励函数end
             end
             filename = 'input.xlsx';
             sheet = 1;
             xlRange = 'A1';
             xlswrite(filename, data, sheet, xlRange)
+            Data_matrix = data;
+        else
+            Data_matrix = xlsread('input.xlsx');
+            new_delta_t = Data_matrix(2, 1) - Data_matrix(1, 1);
         end
-        Data_matrix = xlsread('input.xlsx');
-        new_delta_t = Data_matrix(2,1) - Data_matrix(1,1);
     end
-    
-    %     % 算例2 正弦激励时的激励函数
+
+    %     % 算例1.2 正弦激励时的激励函数start
     %     data(i + 1, 2) = 30*9.81*sin(2*pi*i*new_delta_t);
-    %     % 算例2 正弦激励时的激励函数
+    %     % 算例1.2 正弦激励时的激励函数end
 
 ----
 
 ###### 本文由Markdown编排，图片使用的png格式，图片清晰度不及LaTex使用的pdf图片格式，故将此次作业的电子版二维码置于下方，以便查阅。
 
 <center>
- <img src="img/github.png" width = "150" height = "150" alt="" />
+ <img src="img/github.png" width = "100" height = "100" alt="" />
 </center>
 
 #### Github地址 https://github.com/xuyuanfang/mechanics_of_vibration
